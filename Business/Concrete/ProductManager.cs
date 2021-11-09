@@ -37,7 +37,11 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Product>> ( _productDal.GetAll(), Messages.ProductsListed);
+            else
+            {
+                return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductsListed);
+            }
+            
         }
 
         public IDataResult<List<Product>> GetAllByCategoryId(int id)
@@ -61,8 +65,11 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintenanceTime);
             }
-           
-            return new SuccessDataResult<List<ProductDetailDto>> (_productDal.GetProductDetails());
+            else
+            {
+                return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+            }       
+            
         }
     }
 }
