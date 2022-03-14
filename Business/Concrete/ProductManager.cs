@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcern.Validation;
 using Core.Utilities.Business;
@@ -32,6 +33,7 @@ namespace Business.Concrete
         [SecuredOperation("product.add")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
+        [TransactionScopeAspect]
         public IResult Add(Product product)
         {
             //business code
@@ -135,6 +137,11 @@ namespace Business.Concrete
             }
 
             return new SuccessResult();
+        }
+
+        public IResult AddTransactionalTest(Product product)
+        {
+            return null;
         }
     }
 }
